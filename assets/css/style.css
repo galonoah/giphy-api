@@ -18,6 +18,8 @@ body {
     margin: 0.5em;
     text-align: center;
     text-shadow: 2px 2px 1px rgba(255, 165, 149, 0.7);
+    -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black;
 }
 
 .gif-buttons-area {
@@ -98,7 +100,7 @@ body {
     font-weight: 900;
     height: 55px;
     letter-spacing: 1.5px;
-    margin: 10px 0;
+    margin: 10px auto;
     outline: none;
     overflow: hidden;
     padding: 0;
