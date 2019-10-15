@@ -34,9 +34,7 @@ $(function() {
   // goes through the response data retrieving the URL gif image which gets
   // attach to the new created image tag, to finally prepend the image to
   // gif-image-area
-	$(".gif-buttons")
-		.children()
-		.on("click", function() {
+	$(".gif-buttons").on("click", "button",  function() {
 
       var topic = $(this).text();
 			var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=tJ7NkC6kpacg7ss87ZS2d3E4FRKb6CBg&q=" + topic + "&limit=10";
