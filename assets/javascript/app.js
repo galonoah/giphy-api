@@ -6,24 +6,35 @@ $(function() {
 		"soccer",
 		"web development",
 		"comic-con"
-	];
+  ];
 
-	// Loop will use topics list to create and append predefined buttons
-	topics.forEach(function(topic) {
-		var button = $("<button>").text(topic);
+  // Function will loop through topics list to create  and append
+  // buttons for each string in the array
+  function addGifButtons() {
 
-		$(".gif-buttons").append(button);
-	});
+    $(".gif-buttons").children().remove();
+
+    topics.forEach(function(topic) {
+
+      var button = $("<button>").text(topic);
+
+      $(".gif-buttons").append(button);
+
+  });
+}
+
+addGifButtons();
 
 	// Click event button prepends a new button to gif-buttons
-	// if input text is not empty, input value is use as  button's text name
+	// if input text is not empty
 	$(".add-gif__button").click(function() {
-		var topicText = $(".add-gif__input").val();
+    var topicText = $(".add-gif__input").val();
+
+    topics.unshift(topicText);
+      console.log(topics);
 
 		if (topicText) {
-			var button = $("<button>").text(topicText);
-
-			$(".gif-buttons").prepend(button);
+      addGifButtons();
 		}
 
 		$(".add-gif__input").val("");
