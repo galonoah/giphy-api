@@ -8,7 +8,7 @@ $(function() {
 		"comic-con"
   ];
 
-  // Function will loop through topics list to create  and append
+  // Function will loop through topics list to create and append
   // buttons for each string in the array
   function addGifButtons() {
 
@@ -59,10 +59,33 @@ addGifButtons();
 
           var url = data.images.fixed_height_downsampled.url;
           var img = $("<img>").attr("src", url);
+
+          img.attr({
+            "data-stillGif": data.images.fixed_height_still.url,
+            "data-animatedGif": img.attr("src"),
+            "data-state": "animate"
+          });
+
           $(".gif-images-area").prepend(img);
 
         });
 
 			},);
-		});
+  });
+
+  $(".gif-images-area").on("click", "img", function(){
+    if ($(this).attr("data-state") === "still" ) {
+
+      $(this).attr("src", $(this).attr("data-animatedGif"));
+      $(this).attr("data-state", "animate");
+
+    } else {
+
+      $(this).attr("src", $(this).attr("data-stillGif"));
+      $(this).attr("data-state", "still");
+
+    }
+
+  });
+
 });
