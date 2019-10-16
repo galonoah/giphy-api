@@ -61,6 +61,10 @@ addGifButtons();
 
         response.data.forEach(function(data){
 
+          var div = $("<div>");
+          var span = $("<span>");
+          span.text("Rating: " + data.rating.toUpperCase());
+
           var url = data.images.fixed_height_downsampled.url;
           var img = $("<img>").attr("src", url);
 
@@ -70,7 +74,9 @@ addGifButtons();
             "data-state": "animate"
           });
 
-          $(".gif-images-area").prepend(img);
+          div.append(img, span);
+
+          $(".gif-images-area").prepend(div);
 
         });
 

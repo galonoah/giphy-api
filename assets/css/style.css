@@ -38,8 +38,23 @@ body {
 
 .gif-images-area img {
     border-radius: 10px;
-    flex: 1;
+}
+
+.gif-images-area div {
+    position: relative;
     margin: 5px;
+    border-radius: 10px;
+}
+
+span {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.521);
+    border-radius: 0 10px;
+    padding: 0 10px;
+    color: white;
+    font-size: 0.8em;
+    z-index: 999;
+    bottom: 1px;
 }
 
 .add-gif-form {
