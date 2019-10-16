@@ -16,12 +16,16 @@ $(function() {
 
     topics.forEach(function(topic) {
 
+      var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=tJ7NkC6kpacg7ss87ZS2d3E4FRKb6CBg&q=" + topic + "&limit=1";
+
       var button = $("<button>").text(topic);
+
+      ajaxRequest(queryURL, button);
 
       $(".gif-buttons").append(button);
 
-  });
-}
+   });
+ }
 
 addGifButtons();
 
@@ -73,6 +77,9 @@ addGifButtons();
 			},);
   });
 
+  // Add click event to Pause and play gif images
+  // if data-sate equals still, gif-image url change to animated
+  // else gif-image change to still image
   $(".gif-images-area").on("click", "img", function(){
     if ($(this).attr("data-state") === "still" ) {
 
@@ -87,5 +94,15 @@ addGifButtons();
     }
 
   });
+
+  // Function adds a gif background to gif buttons
+  function ajaxRequest (queryURL, el) {
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      el.css("background-image", "url("+ response.data[0].images.downsized_medium.url +")")
+    });
+  }
 
 });
