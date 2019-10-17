@@ -8,6 +8,8 @@ $(function() {
 		"anime"
   ];
 
+  var offset = 0;
+
   // Function will loop through topics list to create and append
   // buttons for each string in the array
   function addGifButtons() {
@@ -76,7 +78,8 @@ addGifButtons();
 	$(".gif-buttons").on("click", "button",  function() {
 
       var topic = $(this).text();
-			var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=tJ7NkC6kpacg7ss87ZS2d3E4FRKb6CBg&q=" + topic + "&limit=10";
+      var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=tJ7NkC6kpacg7ss87ZS2d3E4FRKb6CBg&q=" + topic + "&limit=10&offset=" + offset;
+      offset+= 5;
 
 			$.ajax({
 				url: queryURL,
