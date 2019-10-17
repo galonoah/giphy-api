@@ -35,14 +35,19 @@ addGifButtons();
 	$(".add-gif__button").click(function() {
     var topicText = $(".add-gif__input").val();
 
-    topics.unshift(topicText);
-      console.log(topics);
-
 		if (topicText) {
+      topics.unshift(topicText);
       addGifButtons();
 		}
 
 		$(".add-gif__input").val("");
+  });
+
+  // 'Enter' key pressed event on input form
+  $(".add-gif__input").keypress(function(e){
+    if(e.which == 13){
+        $(".add-gif__button").click();//Trigger add button click event
+    }
   });
 
   // Adds click event to all gif-buttons. Clicking a gif button triggers
