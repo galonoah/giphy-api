@@ -2,10 +2,10 @@ $(function() {
 	var topics = [
 		"astronomy",
 		"travel",
-		"science",
+		"history",
 		"soccer",
-		"web development",
-		"comic-con"
+		"movies",
+		"anime"
   ];
 
   // Function will loop through topics list to create and append
@@ -23,6 +23,7 @@ $(function() {
       ajaxRequest(queryURL, button);
 
       $(".gif-buttons").append(button);
+      $(".gif-buttons").scrollLeft();
 
    });
  }
