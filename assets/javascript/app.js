@@ -31,13 +31,31 @@ $(function() {
 addGifButtons();
 
 	// Click event button prepends a new button to gif-buttons
-	// if input text is not empty
+  // Condition check for empty strings and ajax request checks
+  // for non-empty data response
 	$(".add-gif__button").click(function() {
     var topicText = $(".add-gif__input").val();
 
 		if (topicText) {
-      topics.unshift(topicText);
-      addGifButtons();
+
+      var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=tJ7NkC6kpacg7ss87ZS2d3E4FRKb6CBg&q=" + topicText + "&limit=10";
+
+			$.ajax({
+				url: queryURL,
+				method: "GET"
+			}).then(function(response) {
+
+          // If response.data which contains the data like images URLs
+          // is empty, do not add new topic text
+          if (response.data.length != 0) {
+
+            topics.unshift(topicText);
+            addGifButtons();
+
+        }
+
+      });
+
 		}
 
 		$(".add-gif__input").val("");
