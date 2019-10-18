@@ -10,7 +10,19 @@ $(function() {
 
   var offset = 0;
 
-  // Function will loop through topics list to create and append
+  // Get local storage data and assign it to newTopics array
+  var newTopics = JSON.parse(localStorage.getItem("newTopics"));
+
+  // If data is found, add topics to topics array else assign and empty array to newTopics array
+  if(!Array.isArray(newTopics)) {
+    newTopics = [];
+  } else {
+    newTopics.forEach(function(topic){
+      topics.unshift(topic);
+    });
+  }
+
+  // Function will loop through topics newTopics to create and append
   // buttons for each string in the array
   function addGifButtons() {
 
@@ -36,7 +48,7 @@ addGifButtons();
   // Condition check for empty strings and ajax request checks
   // for non-empty data response
 	$(".add-gif__button").click(function() {
-    var topicText = $(".add-gif__input").val();
+    var topicText = $(".add-gif__input").val().toLowerCase();
 
 		if (topicText) {
 
@@ -47,10 +59,11 @@ addGifButtons();
 				method: "GET"
 			}).then(function(response) {
 
-          // If response.data which contains the data like images URLs
-          // is empty, do not add new topic text
-          if (response.data.length != 0) {
-
+          // If response.data which contains the data images-URLs is empty, do not add new topic text
+          // Store topic in local storage
+          if (response.data.length != 0 && !topics.includes(topicText)) {
+            newTopics.push(topicText);
+            localStorage.setItem("newTopics", JSON.stringify(newTopics));
             topics.unshift(topicText);
             addGifButtons();
 
@@ -101,9 +114,19 @@ addGifButtons();
             "data-state": "animate"
           });
 
-          div.append(img, span);
+          // onload attribute will be triggered once the image is downloaded
+          var downloadingImage = new Image();
+          downloadingImage.onload = function(){
 
-          $(".gif-images-area").prepend(div);
+              img.src = this.src;
+
+              div.append(img, span);
+
+              $(".gif-images-area").prepend(div);
+
+          };
+
+          downloadingImage.src = url;
 
         });
 

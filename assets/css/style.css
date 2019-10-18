@@ -25,11 +25,13 @@ body {
 .gif-buttons-area {
 	flex: 1 0 30%;
 	box-shadow: 2px 0 10px rgba(0, 0, 0, 0.16);
+	overflow: auto;
 }
 
 .gif-images-area {
 	background-color: whitesmoke;
 	display: flex;
+	justify-content: flex-start;
 	flex-flow: wrap;
 	flex: 1 0 70%;
 	overflow: auto;
@@ -61,7 +63,7 @@ body {
     display: none;
 }
 
-span {
+.gif-images-area span {
 	position: absolute;
 	background-color: rgba(0, 0, 0, 0.521);
 	border-radius: 0 10px;
@@ -74,8 +76,8 @@ span {
 
 .add-gif-form {
 	border-radius: 10px;
-	border: 1px solid #707070;
-	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+	border: 1px solid rgba(12,18,28,.38);
+	box-shadow: 0px 2px 4px 0 rgba(12,18,28,.12);
 	display: flex;
 	margin: 1em auto;
 	width: 70%;
@@ -125,7 +127,8 @@ span {
 	justify-content: space-evenly;
 	margin: auto;
 	width: 80%;
-    overflow: auto;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 .gif-buttons button {
