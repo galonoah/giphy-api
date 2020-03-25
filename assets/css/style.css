@@ -25,7 +25,6 @@ body {
 .gif-buttons-area {
 	flex: 1 0 30%;
 	box-shadow: 2px 0 10px rgba(0, 0, 0, 0.16);
-	overflow: auto;
 }
 
 .gif-images-area {
