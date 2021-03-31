@@ -2,48 +2,21 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const webpack = require("webpack");
-const path = require("path");
+const common = require("./webpack.common");
+const { merge } = require("webpack-merge");
 
-module.exports = {
+module.exports = merge(common, {
   mode: "production",
-  entry: "./src/index.ts",
-  output: {
-    filename: "[name].[contenthash:10].js",
-    path: path.resolve(__dirname, "dist"),
-    assetModuleFilename: "assets/images/[hash:5][ext][query]",
-    clean: true,
-  },
-  resolve: {
-    extensions: [".ts", ".js"],
-  },
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-      },
-      {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
-      {
-        test: /\.(gif|jpg)$/i,
-        type: "asset/resource",
-      },
-      {
-        test: /\.html$/i,
-        loader: "html-loader",
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: "[name].[contenthash:10].css" }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-    }),
   ],
   optimization: {
     minimize: true,
@@ -73,4 +46,4 @@ module.exports = {
   performance: {
     maxAssetSize: 4456450,
   },
-};
+});
