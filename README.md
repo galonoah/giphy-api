@@ -5,7 +5,7 @@
 
 > GIPHY API is a dynamic web page that populates with gifs of your choice
 
-### ✨ [Demo](https://galoelmer.github.io/Giphy-API/)
+### ✨ [Demo](https://galoelmer.github.io/giphy-api/)
 
 
 ## Built With
