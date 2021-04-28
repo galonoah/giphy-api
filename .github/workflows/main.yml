@@ -17,9 +17,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: Install Dependencies
+        run: npm install
+        env: 
+          API_KEY: ${{secrets.API_KEY}}
 
       - name: Run a one-line script
         run: npm run deploy
-        env: 
-          API_KEY: ${{secrets.API_KEY}}
+        
 
