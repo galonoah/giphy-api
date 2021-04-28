@@ -44,6 +44,8 @@ body {
 }
 
 .gif-images-area div {
+	flex-grow: 1;
+	flex-shrink: 1;
 	position: relative;
 	margin: 5px;
 	border-radius: 10px;
@@ -174,6 +176,10 @@ body {
 @media all and (max-width: 768px) {
 	#container {
 		flex-direction: column;
+	}
+
+	.gif-buttons-area {
+		flex: 0;
 	}
 
 	.gif-buttons {
