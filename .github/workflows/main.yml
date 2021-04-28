@@ -18,18 +18,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Install Dependencies
-        run: npm install
-      
-      - name: Build
-        run: npm run build
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
         env: 
           API_KEY: ${{secrets.API_KEY}}
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist
         
 
