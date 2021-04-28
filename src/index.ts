@@ -3,8 +3,8 @@ import "./style.css";
 import $ from "jquery";
 
 $(function () {
+  const URL = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.API_KEY}&q=`;
   var topics = ["astronomy", "travel", "history", "soccer", "movies", "anime"];
-
   var offset = 0;
 
   // Get local storage data and assign it to newTopics array
@@ -26,10 +26,7 @@ $(function () {
     $(".gif-buttons").children().remove();
 
     topics.forEach(function (topic) {
-      var queryURL =
-        "https://api.giphy.com/v1/gifs/search?api_key=tJ7NkC6kpacg7ss87ZS2d3E4FRKb6CBg&q=" +
-        topic +
-        "&limit=1";
+      var queryURL = URL + topic + "&limit=1";
 
       var button = $("<button>").text(topic);
       button.val(topic);
@@ -50,10 +47,7 @@ $(function () {
     var topicText = $(".add-gif__input").val();
 
     if (typeof topicText === "string" && topicText.length > 0) {
-      var queryURL =
-        "https://api.giphy.com/v1/gifs/search?api_key=tJ7NkC6kpacg7ss87ZS2d3E4FRKb6CBg&q=" +
-        topicText +
-        "&limit=10";
+      var queryURL = URL + topicText + "&limit=10";
 
       $.ajax({
         url: queryURL,
@@ -91,11 +85,7 @@ $(function () {
   // gif-image-area
   $(".gif-buttons").on("click", "button", function (ev) {
     var topic = (ev.target as HTMLButtonElement).value;
-    var queryURL =
-      "https://api.giphy.com/v1/gifs/search?api_key=tJ7NkC6kpacg7ss87ZS2d3E4FRKb6CBg&q=" +
-      topic +
-      "&limit=10&offset=" +
-      offset;
+    var queryURL = URL + topic + "&limit=10&offset=" + offset;
     offset += 5;
 
     $.ajax({
@@ -118,7 +108,7 @@ $(function () {
         data.forEach(function (data: Data) {
           var div = $("<div>");
           var span = $("<span>");
-          span.text("Rating: " + data.rating.toUpperCase());
+          span.text("Rated: " + data.rating.toUpperCase());
 
           var url = data.images.fixed_height_downsampled.url;
           var img = ($("<img>") as JQuery<HTMLImageElement>).attr("src", url);

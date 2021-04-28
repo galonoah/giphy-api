@@ -31,7 +31,7 @@ body {
 	background-color: whitesmoke;
 	display: flex;
 	justify-content: flex-start;
-	flex-flow: wrap;
+	flex-wrap: wrap;
 	flex: 1 0 70%;
 	overflow: auto;
 	padding: 15px;
@@ -39,6 +39,8 @@ body {
 
 .gif-images-area img {
 	border-radius: 10px;
+	width: 100%;
+	height: 100%;
 }
 
 .gif-images-area div {
@@ -128,6 +130,20 @@ body {
 	width: 80%;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
+}
+
+.gif-buttons::-webkit-scrollbar {
+  height: 12px;
+}
+
+.gif-buttons::-webkit-scrollbar-track {
+  background: #f1f0f0;   
+}
+
+.gif-buttons::-webkit-scrollbar-thumb {
+  background-color: #ffc2b7;   
+  border-radius: 25px;    
+  border: 1px solid #ffac9d;  
 }
 
 .gif-buttons button {

@@ -13,7 +13,7 @@
 * [Giphy API](https://developers.giphy.com/) - The GIPHY Developer Portal is how you integrate the world's best GIF API into your business, app or project.
 
 ## Screenshot
-![Gighy API screenshot](./assets/images/giphy-api.gif);
+![Gighy API screenshot](./src/assets/images/giphy-api.gif);
 
 ## Author
 
