@@ -7,6 +7,25 @@
 
 ### ✨ [Demo](https://sillygif.netlify.app/)
 
+## Prerequisites
+
+- npm >=5.5.0
+- node >=9.3.0
+- Netlify CLI
+- [Giphy API](https://developers.giphy.com/docs/api)
+
+## Install
+
+```sh
+npm install
+```
+
+## Usage
+
+```sh
+npm start # local development with minimum placeholder data from miragejs server
+npm run dev # requires netlify CLI and Ghiphy api on a .env >> API_KEY=key
+```
 
 ## Built With
 
@@ -30,3 +49,8 @@ Contributions, issues and feature requests are welcome!
 ## Show your support
 
 Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2021 [Elmer C. Galo](https://github.com/galoelmer).<br />
+This project is [MIT](https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE) licensed.

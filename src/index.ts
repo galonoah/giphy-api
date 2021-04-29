@@ -1,6 +1,11 @@
 import "./reset.css";
 import "./style.css";
 import $ from "jquery";
+import { makeServer } from "./server";
+
+if (process.env.APP_ENV !== "netlify-server") {
+  makeServer({ environment: "development" });
+}
 
 $(function () {
   var topics = ["astronomy", "travel", "history", "soccer", "movies", "anime"];

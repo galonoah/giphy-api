@@ -3,6 +3,7 @@ const common = require("./webpack.common");
 const Dotenv = require("dotenv-webpack");
 const { merge } = require("webpack-merge");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = merge(common, {
   mode: "development",
@@ -21,6 +22,9 @@ module.exports = merge(common, {
       template: "./src/index.html",
     }),
     new Dotenv(),
+    new webpack.EnvironmentPlugin({
+      APP_ENV: "local-server",
+    }),
   ],
   module: {
     rules: [
