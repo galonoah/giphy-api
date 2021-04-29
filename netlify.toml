@@ -4,7 +4,7 @@ status = 200
 to = "/.netlify/functions/:splat"
 
 [dev]
+autoLaunch = false
 command = "npm start"
 framework = "#custom"
-publish = 'dist'
 targetPort = 3000
