@@ -36,7 +36,7 @@ $(function () {
   });
 
   // Click event button prepends a new button to gif-buttons
-  // Condition check for empty strings 
+  // Condition check for empty strings
   $(".add-gif__button").on("click", function () {
     var topicText = $(".add-gif__input").val();
 
@@ -119,7 +119,12 @@ $(function () {
       .catch((err) => {
         console.log(err);
       });
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      const container = document.querySelector("#container")! as HTMLDivElement;
+      container.scrollIntoView();
+    } else {
       $(".gif-images-area").scrollTop(0);
+    }
   });
 
   // Add click event to Pause and play gif images
@@ -153,5 +158,20 @@ $(function () {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  window.onscroll = function () {
+    myFunction();
+  };
+
+  var navbar = document.getElementById("formButtonsWrap")! as HTMLDivElement;
+  var sticky = navbar.offsetTop;
+
+  function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky");
+    } else {
+      navbar.classList.remove("sticky");
+    }
   }
 });
