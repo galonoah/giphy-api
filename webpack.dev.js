@@ -10,6 +10,7 @@ module.exports = merge(common, {
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     host: "0.0.0.0",
+    port: 3000,
     openPage: "http://localhost:3000",
   },
   plugins: [

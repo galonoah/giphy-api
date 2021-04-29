@@ -4,7 +4,8 @@
   "description": "The GIPHY Developer Portal is how you integrate the world's best GIF API into your business, app or project",
   "private": "true",
   "scripts": {
-    "start": "webpack serve --open --config webpack.dev.js",
+    "dev": "netlify dev",
+    "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "deploy": "gh-pages -d dist"
   },

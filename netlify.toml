@@ -6,7 +6,5 @@ to = "/.netlify/functions/:splat"
 [dev]
 command = "npm start"
 framework = "#custom"
-port = 8888
 publish = 'dist'
-targetPort = 8080
-# autoLaunch = false
+targetPort = 3000

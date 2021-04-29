@@ -14,34 +14,29 @@ $(function () {
 
   // If data is found, add topics to topics array else assign and empty array to newTopics array
   if (newTopics.length) {
-    newTopics.forEach(function (topic) {
-      topics.unshift(topic);
-    });
+    topics = [...newTopics, ...topics];
   }
 
-  // Function will loop through topics newTopics to create and append
-  // buttons for each string in the array
-  function addGifButtons() {
-    $(".gif-buttons").children().remove();
+  // Create GIF button
+  function createGifButton(topic: string) {
+    var queryURL = `/api/get-giphy-data?q=${topic}&limit=1`;
 
-    topics.forEach(async function (topic) {
-      var queryURL = `/api/get-giphy-data?q=${topic}&limit=1`;
+    var button = $("<button>").text(topic);
+    button.val(topic);
 
-      var button = $("<button>").text(topic);
-      button.val(topic);
+    ajaxRequest(queryURL, button);
 
-      ajaxRequest(queryURL, button);
-
-      $(".gif-buttons").append(button);
-      $(".gif-buttons").scrollLeft();
-    });
+    $(".gif-buttons").prepend(button);
+    $(".gif-buttons").scrollLeft(0);
   }
 
-  addGifButtons();
+  // create and append gif button from topics list array
+  topics.forEach((topic) => {
+    createGifButton(topic);
+  });
 
   // Click event button prepends a new button to gif-buttons
-  // Condition check for empty strings and ajax request checks
-  // for non-empty data response
+  // Condition check for empty strings 
   $(".add-gif__button").on("click", function () {
     var topicText = $(".add-gif__input").val();
 
@@ -49,7 +44,7 @@ $(function () {
       newTopics.push(topicText);
       localStorage.setItem("newTopics", JSON.stringify(newTopics));
       topics.unshift(topicText);
-      addGifButtons();
+      createGifButton(topicText);
     }
 
     $(".add-gif__input").val("");
@@ -124,6 +119,7 @@ $(function () {
       .catch((err) => {
         console.log(err);
       });
+      $(".gif-images-area").scrollTop(0);
   });
 
   // Add click event to Pause and play gif images
