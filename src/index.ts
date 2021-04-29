@@ -3,7 +3,6 @@ import "./style.css";
 import $ from "jquery";
 
 $(function () {
-  const URL = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.API_KEY}&q=`;
   var topics = ["astronomy", "travel", "history", "soccer", "movies", "anime"];
   var offset = 0;
 
@@ -25,8 +24,8 @@ $(function () {
   function addGifButtons() {
     $(".gif-buttons").children().remove();
 
-    topics.forEach(function (topic) {
-      var queryURL = URL + topic + "&limit=1";
+    topics.forEach(async function (topic) {
+      var queryURL = `/api/get-giphy-data?q=${topic}&limit=1`;
 
       var button = $("<button>").text(topic);
       button.val(topic);
@@ -47,25 +46,10 @@ $(function () {
     var topicText = $(".add-gif__input").val();
 
     if (typeof topicText === "string" && topicText.length > 0) {
-      var queryURL = URL + topicText + "&limit=10";
-
-      $.ajax({
-        url: queryURL,
-        method: "GET",
-      }).then(function (response) {
-        // If response.data which contains the data images-URLs is empty, do not add new topic text
-        // Store topic in local storage
-        if (
-          response.data.length !== 0 &&
-          typeof topicText === "string" &&
-          !topics.includes(topicText)
-        ) {
-          newTopics.push(topicText);
-          localStorage.setItem("newTopics", JSON.stringify(newTopics));
-          topics.unshift(topicText);
-          addGifButtons();
-        }
-      });
+      newTopics.push(topicText);
+      localStorage.setItem("newTopics", JSON.stringify(newTopics));
+      topics.unshift(topicText);
+      addGifButtons();
     }
 
     $(".add-gif__input").val("");
@@ -85,54 +69,61 @@ $(function () {
   // gif-image-area
   $(".gif-buttons").on("click", "button", function (ev) {
     var topic = (ev.target as HTMLButtonElement).value;
-    var queryURL = URL + topic + "&limit=10&offset=" + offset;
+    var queryURL = `/api/get-giphy-data?q=${topic}&limit=10&offset=${offset}`;
     offset += 5;
 
-    $.ajax({
-      url: queryURL,
-      method: "GET",
-    }).then(function (response) {
-      if (response.data.length !== 0) {
-        interface Data {
-          rating: string;
-          images: {
-            fixed_height_downsampled: {
-              url: string;
-            };
-            fixed_height_still: {
-              url: string;
-            };
-          };
+    fetch(queryURL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-        var data: [] = response.data;
-        data.forEach(function (data: Data) {
-          var div = $("<div>");
-          var span = $("<span>");
-          span.text("Rated: " + data.rating.toUpperCase());
+        return response.json();
+      })
+      .then((data) => {
+        if (data.data.length !== 0) {
+          interface Data {
+            rating: string;
+            images: {
+              fixed_height_downsampled: {
+                url: string;
+              };
+              fixed_height_still: {
+                url: string;
+              };
+            };
+          }
+          var currentData: [] = data.data;
+          currentData.forEach(function (data: Data) {
+            var div = $("<div>");
+            var span = $("<span>");
+            span.text("Rated: " + data.rating.toUpperCase());
 
-          var url = data.images.fixed_height_downsampled.url;
-          var img = ($("<img>") as JQuery<HTMLImageElement>).attr("src", url);
+            var url = data.images.fixed_height_downsampled.url;
+            var img = ($("<img>") as JQuery<HTMLImageElement>).attr("src", url);
 
-          img.attr({
-            "data-stillGif": data.images.fixed_height_still.url,
-            "data-animatedGif": img.attr("src"),
-            "data-state": "animate",
+            img.attr({
+              "data-stillGif": data.images.fixed_height_still.url,
+              "data-animatedGif": img.attr("src"),
+              "data-state": "animate",
+            });
+
+            // onload attribute will be triggered once the image is downloaded
+            var downloadingImage = new Image();
+            downloadingImage.onload = function () {
+              img.attr("src", url);
+
+              div.append(img, span);
+
+              $(".gif-images-area").prepend(div);
+            };
+
+            downloadingImage.src = url;
           });
-
-          // onload attribute will be triggered once the image is downloaded
-          var downloadingImage = new Image();
-          downloadingImage.onload = function () {
-            img.attr("src", url);
-
-            div.append(img, span);
-
-            $(".gif-images-area").prepend(div);
-          };
-
-          downloadingImage.src = url;
-        });
-      }
-    });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 
   // Add click event to Pause and play gif images
@@ -150,14 +141,21 @@ $(function () {
 
   // Function adds a gif background to gif buttons
   function ajaxRequest(queryURL: string, el: JQuery) {
-    $.ajax({
-      url: queryURL,
-      method: "GET",
-    }).then(function (response) {
-      el.css(
-        "background-image",
-        "url(" + response.data[0].images.downsized_medium.url + ")"
-      );
-    });
+    fetch(queryURL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then(({ data }) => {
+        el.css(
+          "background-image",
+          "url(" + data[0].images.downsized_medium.url + ")"
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 });
