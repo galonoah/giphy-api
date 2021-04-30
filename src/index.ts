@@ -3,9 +3,9 @@ import "./style.css";
 import $ from "jquery";
 import { makeServer } from "./server";
 
-var LOCAL_SERVER: string | undefined = undefined;
+declare var LOCAL_SERVER: any;
 
-if (LOCAL_SERVER && LOCAL_SERVER === "mirage-js") {
+if (LOCAL_SERVER) {
   makeServer({ environment: "development" });
 }
 

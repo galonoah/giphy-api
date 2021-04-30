@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const common = require("./webpack.common");
 const { merge } = require("webpack-merge");
+const webpack = require("webpack");
 
 module.exports = merge(common, {
   mode: "production",
@@ -17,6 +18,9 @@ module.exports = merge(common, {
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: "[name].[contenthash:10].css" }),
+    new webpack.DefinePlugin({
+      LOCAL_SERVER: JSON.stringify(false),
+    }),
   ],
   optimization: {
     minimize: true,

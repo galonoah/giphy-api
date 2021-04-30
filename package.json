@@ -7,7 +7,7 @@
     "dev": "cross-env NODE_ENV=netlify-dev netlify dev",
     "start": "if-env NODE_ENV=netlify-dev && npm run start:dev || npm run start:local",
     "start:dev": "webpack serve --config webpack.dev.js --open",
-    "start:local": "webpack serve --env server=mirage --config webpack.dev.js --open",
+    "start:local": "webpack serve --env server=true --config webpack.dev.js --open",
     "build": "webpack --config webpack.prod.js",
     "deploy": "gh-pages -d dist"
   },

@@ -24,9 +24,7 @@ module.exports = (env) => {
       }),
       new Dotenv(),
       new webpack.DefinePlugin({
-        LOCAL_SERVER: env.server
-          ? JSON.stringify("mirage-js")
-          : JSON.stringify("netlify-dev"),
+        LOCAL_SERVER: env.server ? JSON.stringify(true) : JSON.stringify(false),
       }),
     ],
     module: {
