@@ -3,7 +3,9 @@ import "./style.css";
 import $ from "jquery";
 import { makeServer } from "./server";
 
-if (process.env.APP_ENV !== "netlify-server") {
+var LOCAL_SERVER: string | undefined = undefined;
+
+if (LOCAL_SERVER && LOCAL_SERVER === "mirage-js") {
   makeServer({ environment: "development" });
 }
 
