@@ -26,8 +26,7 @@ export function makeServer({ environment = "test" } = {}) {
               {
                 images: {
                   downsized_medium: {
-                    url:
-                      "https://media.giphy.com/media/3ov9k1173PdfJWRsoE/giphy.gif",
+                    url: "https://media.giphy.com/media/3ov9k1173PdfJWRsoE/giphy.gif",
                   },
                 },
               },

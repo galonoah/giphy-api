@@ -1,7 +1,7 @@
-const process = require("process");
+const process = require('process');
 
-const axios = require("axios");
-const qs = require("qs");
+const axios = require('axios');
+const qs = require('qs');
 
 const handler = async function (event) {
   const API_PARAMS = qs.stringify(event.queryStringParameters);
@@ -11,13 +11,13 @@ const handler = async function (event) {
     const { data } = await axios.get(URL);
     return {
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     };
   } catch (error) {
     const { status, statusText, headers, data } = error.response;
     return {
       statusCode: error.response.status,
-      body: JSON.stringify({ status, statusText, headers, data }),
+      body: JSON.stringify({ status, statusText, headers, data })
     };
   }
 };

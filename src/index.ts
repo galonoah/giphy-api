@@ -8,7 +8,10 @@ declare var LOCAL_SERVER: any;
 if (LOCAL_SERVER) {
   makeServer({ environment: "development" });
 }
-
+// TODO: Rewrite Documenation
+// Implement better documentation
+// TODO: Add functionality to share gifs
+// Remove the rated value and add social media links 
 $(function () {
   var topics = ["astronomy", "travel", "history", "soccer", "movies", "anime"];
   var offset = 0;
@@ -24,7 +27,7 @@ $(function () {
     topics = [...newTopics, ...topics];
   }
 
-  // Create GIF button
+  // Create GIF buttons
   function createGifButton(topic: string) {
     var queryURL = `/api/get-giphy-data?q=${topic}&limit=1`;
 
@@ -165,20 +168,5 @@ $(function () {
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  window.onscroll = function () {
-    myFunction();
-  };
-
-  var navbar = document.getElementById("formButtonsWrap")! as HTMLDivElement;
-  var sticky = navbar.offsetTop;
-
-  function myFunction() {
-    if (window.pageYOffset >= sticky) {
-      navbar.classList.add("sticky");
-    } else {
-      navbar.classList.remove("sticky");
-    }
   }
 });
