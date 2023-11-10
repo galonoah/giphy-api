@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/galoelmer/giphy-api#readme",
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^1.6.0",
     "jquery": "^3.6.0"
   },
   "devDependencies": {
