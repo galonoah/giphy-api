@@ -38,9 +38,9 @@ npm run dev # requires netlify CLI and Ghiphy api on a .env >> API_KEY=key
 
 ## Author
 
-👤 **Elmer C. Galo**
+👤 **Noah Galo**
 
-* Github: [@galoelmer](https://github.com/galoelmer)
+* Github: [@galonoah](https://github.com/galonoah)
 
 ## 🤝 Contributing
 
@@ -52,5 +52,5 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2021 [Elmer C. Galo](https://github.com/galoelmer).<br />
+Copyright © 2024 [Noah Galo](https://github.com/galonoah).<br />
 This project is [MIT](https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE) licensed.
